@@ -14,17 +14,19 @@ const LatestProperties = () => {
   const [latestProperties, setLatestProperties] = useState([]);
 
   //Fetch latest properties//
+  const fetchLatest = async () => {
+    try {
+      const data = await request("/property/find/latest", "GET");
+      setLatestProperties(data);
+    } catch (error) {
+      console.error(error.message);
+    }
+  };
+  
   useEffect(() => {
-    const fetchLatest = async () => {
-      try {
-        const data = await request("/property/find/latest", "GET");
-        setLatestProperties(data);
-      } catch (error) {
-        console.error(error.message);
-      }
-      fetchLatest();
-    };
+    fetchLatest();
   }, []);
+  
 
   return (
     // Title

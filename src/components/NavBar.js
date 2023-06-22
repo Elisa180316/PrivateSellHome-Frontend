@@ -24,7 +24,7 @@ const NavBar = () => {
           <button className='btn btn-primary me-2'>Register</button>
         </Link>
         <Link to='/signin'>
-          <button className='btn btn-primary me-5'>Sign In</button>
+          <button className='btn btn-primary me-5'>Login</button>
         </Link>
       </div>
     </Container>
