@@ -10,7 +10,7 @@ import {
     REGISTER,
 } from "redux-persist";
 import storage from "redux-persist/lib/storage";
-import authSlice from "./authSlice";
+import authSlice from "../reducers/authSlice";
 
 
 const persistConfig = {
@@ -20,10 +20,11 @@ const persistConfig = {
 };
 
 const reducers = combineReducers({
-    auth: authSlice 
+    auth: authSlice,
 })
 
 const persistedReducer = persistReducer(persistConfig, reducers);
+
 
 export const store = configureStore({
     reducer: persistedReducer,

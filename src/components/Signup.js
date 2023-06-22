@@ -1,68 +1,131 @@
-import React, { useState } from "react";
-import "../styles/signup.css";
-import { AiOutlineFileImage } from "react-icons/ai";
-import { Container } from "react-bootstrap";
-import { useNavigate, Link } from "react-router-dom";
+import React from 'react'
+import { useState } from 'react'
+import { AiOutlineFileImage } from 'react-icons/ai'
+import { useNavigate, Link } from 'react-router-dom'
+import { useSelector, useDispatch } from 'react-redux'
+import { register } from '../reducers/authSlice'
+import { request } from '../utilities/fetch'
+import { Container } from 'react-bootstrap'
 
-//States//
-const [state, setState] = useState({})
-const [photo, setPhoto] = useState("")
-const dispatch = useDispatch()
-const navigate = useNavigate()
 
-const handleState = (e) => {
-    setState (prev => {
-        return {prev, [e.target.name]:e.target.value}
-    })
-}
-
-const handleSubmit = async (e) => {
-    e.preventDefault()
-    try {
-        let filename = null
-        if (photo) {
-            const formData = new FormData()
-            filename = crypto.randomUUID() + photo.name
-            formData.append ("filename", filename)
-            formData.append ("image", photo)
-            await request ('/upload/image', "POST", {}, formData, true)
-        } else {
-            return
-        }
-        const headers = {
-            'Content-Type': 'application/json'
-        }
-        const data = await request ('/auth/register', "POST", headers, {...state, profileImg:filename})
-        console.log(data)
-        dispatch(register(data))
-        navigate('/')
-    } catch (error) {
-        console.log(error)
-    }
-}
-
-// Form register
 const Signup = () => {
+  const [state, setState] = useState({})
+  const [photo, setPhoto] = useState("")
+  const [error, setError] = useState(false)
+  const [emptyFields, setEmptyFields] = useState(false)
+  const { token } = useSelector((state) => state.auth)
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
+
+  const handleState = (e) => {
+    setState((prev) => {
+      return { ...prev, [e.target.name]: e.target.value }
+    })
+  }
+
+  const handleRegister = async (e) => {
+    e.preventDefault()
+
+    // how to check if ONLY ONE of the values of an object is empty
+    if (Object.values(state).some((v) => v === '')) {
+      setEmptyFields(true)
+      setTimeout(() => {
+        setEmptyFields(false)
+      }, 2500)
+    }
+
+    try {
+      let filename = null
+      if (photo) {
+        const formData = new FormData()
+        filename = crypto.randomUUID() + photo.name
+        formData.append('filename', filename)
+        formData.append('image', photo)
+
+        await fetch(`http://localhost:5050/upload/image`, {
+          headers: {
+            'Authorization': `Bearer ${token}`
+          },
+          method: 'POST',
+          body: formData
+        })
+      } else {
+        setEmptyFields(true)
+        setTimeout(() => {
+          setEmptyFields(false)
+        }, 2500)
+        return
+      }
+
+      const headers = {
+        "Content-Type": "application/json",
+      }
+
+      const data = await request(`/auth/register`, "POST", headers, { ...state, profileImg: filename })
+
+
+      dispatch(register(data))
+      navigate("/")
+    } catch (error) {
+      setError(true)
+      setTimeout(() => {
+        setError(false)
+      }, 2000)
+      console.error(error)
+    }
+  }
+
   return (
     <Container>
-      <h2>Register</h2>
-      <form onSubmit={handleSubmit}>
-        <input onChange={handleState} type="text" name="username" placeholder="Your username here" />
-        <input onChange={handleState} type="email" name="email" placeholder="Your email here" />
-        <label htmlFor="photo">
-          Upload Photo <AiOutlineFileImage />
-        </label>
-        <input onChange={(e) => setPhoto(e.target.file[0])} id="photo" type="file" style={{ display: "none" }} />
-        <input onChange={handleState} type="password" name="password" placeholder="You password here">
-          Password
-        </input>
-        <button type="submit" Register></button>
-        <p>
-          Already have an account? <Link to="/signin"> Login </Link>
-        </p>
-      </form>
+    <h2>Register</h2>
+    <form onSubmit={handleRegister}>
+      <input
+        onChange={handleState}
+        type="text"
+        name="username"
+        placeholder="Your username here"
+      />
+      <input
+        onChange={handleState}
+        type="email"
+        name="email"
+        placeholder="Your email here"
+      />
+      <label htmlFor="photo">
+        Upload Photo <AiOutlineFileImage />
+      </label>
+      <input
+        onChange={(e) => setPhoto(e.target.files[0])}
+        id="photo"
+        type="file"
+        style={{ display: "none" }}
+      />
+      <input
+        onChange={handleState}
+        type="password"
+        name="password"
+        placeholder="Your password here"
+      />
+      <button type="submit">Register</button>
+      <p>
+        Already have an account? <Link to="/signin"> Login </Link>
+      </p>
+    </form>
+  
+        {error && (
+          <div>
+            There was an error signing up! Try again.
+          </div>
+        )}
+        {emptyFields && (
+          <div>
+            Fill all fields!
+          </div>
+        )}
+     
+   
     </Container>
-  );
-};
+  )
+}
 
-export default Signup;
+export default Signup
