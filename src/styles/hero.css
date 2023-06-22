@@ -1,0 +1,12 @@
+#root > div:nth-child(4) > select {
+    border-radius: 10px;
+    border-color: rgb(95, 229, 95);
+    }
+    
+    #root > div:nth-child(4) > svg {
+        background-color: rgb(151, 151, 229);
+        border-radius: 50px;
+        height: 50px;
+        width: 50px;
+        padding: 8px;
+    }
