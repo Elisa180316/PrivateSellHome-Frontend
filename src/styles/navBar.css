@@ -1,3 +1,105 @@
-#root > nav {
-    background-color: #1a3860;
-}
+/* LOGO */
+#root > nav > div > span > a {
+    color: rgb(222, 184, 35);
+    font-weight: bold;
+    text-decoration: none;
+  }
+  
+  /* Link centrali */
+  #basic-navbar-nav > div:nth-child(1) > a {
+    font-weight: bold;
+  }
+  
+  #basic-navbar-nav > div:nth-child(1) > a:hover {
+    color: rgb(47, 255, 71);
+  }
+  
+  
+  
+  /* Login Btn */
+  #basic-navbar-nav > div:nth-child(2) > a:nth-child(2) > button {
+    margin-top: 16px;
+  }
+  
+  /* Hello user */
+  #basic-navbar-nav > div:nth-child(2) > span:nth-child(1) {
+    font-weight: bold;
+    margin-right: 8px;
+    margin-top: 20px;
+  }
+  
+  /* Logout */
+  #basic-navbar-nav > div:nth-child(2) > span:nth-child(2) {
+    font-weight: bold;
+    color: red;
+    margin-right: 8px;
+  }
+  
+  /* Add property */
+  
+  #basic-navbar-nav > div:nth-child(2) > a {
+    font-weight: bold;
+    text-decoration: none;
+    color: black;
+    margin-top: 20px;
+  }
+  
+  body > div.fade.modal.show > div > div > div.modal-body > form > button {
+    margin-top: 10px;
+  }
+  
+  .error {
+    padding: 1rem;
+    background-color: #f00;
+    color: #fff;
+    position: absolute;
+    z-index: 9999999999;
+    margin-left: 47%;
+    margin-top: 6.5%;
+    border-radius: 8px;
+  }
+  
+  .nav-success {
+    padding: 1rem;
+    background-color: rgb(239, 72, 206);
+    color: #fff;
+    position: absolute;
+    z-index: 9999999999;
+    margin-left: 40%;
+    margin-top: 6.5%;
+    border-radius: 8px;
+  }
+  
+  .nav-btn {
+    width: 100px;
+    font-size: 16px;
+    font-weight: 600;
+    color: #fff;
+    cursor: pointer;
+    margin: 20px;
+    height: 40px;
+    text-align: center;
+    border: none;
+    background-size: 300% 100%;
+  
+    border-radius: 50px;
+  
+    transition: all 0.4s ease-in-out;
+    background-image: linear-gradient(
+      to right,
+      #667eea,
+      #764ba2,
+      #6b8dd6,
+      #8e37d7
+    );
+    box-shadow: 0 4px 15px 0 rgba(116, 79, 168, 0.75);
+  }
+  .nav-btn:hover {
+    background-position: 100% 0;
+  
+    transition: all 0.4s ease-in-out;
+  }
+  
+  .nav-btn:focus {
+    outline: none;
+  }

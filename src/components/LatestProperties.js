@@ -1,55 +1,77 @@
-import React from "react";
-import "../styles/latestProperties.css";
-import { useEffect } from "react";
-import { useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useState, useEffect } from "react";
 import { request } from "../utilities/fetch";
-import { Container } from "react-bootstrap";
-import img from "../assets/appartment1.jpg";
-import person from "../assets/person.jpg";
-import {Fabed, FasquareFull} from 'react-icons'
+import { Link } from "react-router-dom";
+import { FaBed } from "react-icons/fa";
+import { Card, Container, Row, Col } from "react-bootstrap";
+import single from "../assets/single.jpg";
+import "../styles/latestProperties.css";
 
 const LatestProperties = () => {
-  //States//
+  //State//
   const [latestProperties, setLatestProperties] = useState([]);
 
   //Fetch latest properties//
-  const fetchLatest = async () => {
-    try {
-      const data = await request("/property/find/latest", "GET");
-      setLatestProperties(data);
-    } catch (error) {
-      console.error(error.message);
-    }
-  };
-  
   useEffect(() => {
+    const fetchLatest = async () => {
+      try {
+        const data = await request("/property/find/latest", "GET");
+        setLatestProperties(data);
+      } catch (error) {
+        console.error(error.message);
+      }
+    };
     fetchLatest();
   }, []);
-  
 
   return (
-    // Title
     <>
       <Container>
-        <h3>Check out the latest properties</h3>
+        <h5 className="text-center" style={{ fontSize: "28px" }}>
+          Latest Properties
+        </h5>
       </Container>
-
-      {/*  Latest Properties */}
-
       <Container>
-        {latestProperties?.map((property) => (
-          <div key={property._id}>
-            <Link to={`/propertyDetail/${property._id}`}>
-              <img src={img}alt = "" />
-            </Link>
-            <span>{property?.price}Price</span>
-            <img src = {person}/>
-            <span> {property?.bedrooms}Bedrooms </span>
-            <span>{property?.squaremeters}Square Meters </span>
-            <span>{property?.description}Description</span>
-          </div>
-        ))}
+        <Row className="justify-content-center align-items-center">
+          <Col
+            xs={6}
+            md={6}
+            lg={12}
+            className="d-flex flex-wrap gap-3 mt-3 mb-5"
+          >
+            {latestProperties?.map((property) => (
+              <Card
+                className="property-cards"
+                key={property._id}
+                style={{
+                  width: "18rem",
+                  boxShadow: "rgb(38, 57, 77) 0px 20px 30px -10px",
+                }}
+              >
+                <Link to={`/propertyDetail/${property._id}`}>
+                  <Card.Img
+                    style={{ height: "200px" }}
+                    src={
+                      property.img
+                        ? `http://localhost:5050/images/${property.img}`
+                        : single
+                    }
+                    alt=""
+                  />
+                  <div className="overlay-details">Details</div>
+                </Link>
+                <Card.Body>
+                  <Card.Title>Title: {property?.title}</Card.Title>
+                  <Card.Text>Price $: {property?.price}</Card.Text>
+                  <Card.Text>Location: {property?.continent}</Card.Text>
+                  <Card.Text>
+                    Bedrooms: {property?.bedrooms} <FaBed />
+                  </Card.Text>
+                  <Card.Text>Squaremeters: {property?.squaremeters}</Card.Text>
+                </Card.Body>
+              </Card>
+            ))}
+          </Col>
+        </Row>
       </Container>
     </>
   );

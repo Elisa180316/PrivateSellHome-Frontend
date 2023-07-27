@@ -1,0 +1,19 @@
+#root > div:nth-child(7) > h3 {
+    margin-left: 5%;
+}
+
+.last {
+    margin-left: 20%;
+}
+
+.carousel-container {
+    height: 700px;
+    overflow: hidden;
+    
+  }
+  
+  @media (max-width: 767px) {
+    .carousel-container {
+      height: 350px; 
+    }
+  }

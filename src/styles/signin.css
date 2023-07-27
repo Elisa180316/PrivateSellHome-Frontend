@@ -1,0 +1,45 @@
+@keyframes scaleIn {
+    0% {
+      transform: scale(0);
+      opacity: 0;
+    }
+    100% {
+      transform: scale(1);
+      opacity: 1;
+    }
+  }
+  
+  .login-form {
+    border: 1px solid rgba(255, 255, 255, 0.2); /* Border color with opacity */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); /* Shadow effect */
+    backdrop-filter: blur(10px); /* Glass effect */
+    width: 350px;
+    height: 400px;
+    animation: scaleIn 1.5s ease-in-out; 
+  }
+  
+  .login-error {
+    padding: 1rem;
+    background-color: #f00;
+    color: #fff;
+    position: absolute;
+    z-index: 9999999999;
+    margin-left: 47%;
+    margin-top: -80%;
+    border-radius: 8px;
+  }
+  
+  .fields-login-error {
+    padding: 1rem;
+    background-color: #f00;
+    color: #fff;
+    position: absolute;
+    z-index: 9999999999;
+    margin-left: 3%;
+    margin-top: -80%;
+    border-radius: 8px;
+  }
+  
+  .google-login {
+    margin-left: 25%;
+  }

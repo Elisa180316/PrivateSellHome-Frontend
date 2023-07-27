@@ -1,0 +1,10 @@
+.custom-container {
+    width: 600px;
+    margin: auto;
+    text-align: justify;
+  }
+  
+  .custom-container p {
+    font-size: 18px;
+    line-height: 2;
+  }
