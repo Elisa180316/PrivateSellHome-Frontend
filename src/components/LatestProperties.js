@@ -52,7 +52,7 @@ const LatestProperties = () => {
                     style={{ height: "200px" }}
                     src={
                       property.img
-                        ? `http://localhost:5050/images/${property.img}`
+                        ? `https://privatesellhome.onrender.com/images/${property.img}`
                         : single
                     }
                     alt=""

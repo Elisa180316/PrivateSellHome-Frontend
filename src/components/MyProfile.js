@@ -67,7 +67,7 @@ const MyProfile = () => {
               >
                 <Link to={`/propertyDetail/${listedProperty._id}`}>
                   <Card.Img
-                    src={`http://localhost:5050/images/${listedProperty?.img}`}
+                    src={`https://privatesellhome.onrender.com/images/${listedProperty?.img}`}
                     alt=""
                   />
                 </Link>

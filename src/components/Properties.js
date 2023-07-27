@@ -196,7 +196,7 @@ const Properties = () => {
                         >
                           <Link to={`/propertyDetail/${property._id}`}>
                             <Card.Img
-                              src={`http://localhost:5050/images/${property?.img}`}
+                              src={`https://privatesellhome.onrender.com/images/${property?.img}`}
                               alt=""
                               style={{ height: "500px" }}
                             />

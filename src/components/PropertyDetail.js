@@ -85,7 +85,7 @@ const PropertyDetail = () => {
             }}
           >
             <Card.Img
-              src={`http://localhost:5050/images/${propertyDetail?.img}`}
+              src={`https://privatesellhome.onrender.com/images/${propertyDetail?.img}`}
               style={{ height: "500px" }}
             />
 

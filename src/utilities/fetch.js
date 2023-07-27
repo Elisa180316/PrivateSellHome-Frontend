@@ -1,4 +1,4 @@
-const BASE_URL = "http://localhost:5050"
+const BASE_URL = process.env.REACT_APP_SERVER_BASE_URL
 
 //The request function is defined as an asynchronous function with the following parameters:
 // url: The URL to which the request is made. 
